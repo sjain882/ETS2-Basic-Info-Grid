@@ -1,0 +1,390 @@
+﻿/*
+    Dashboard skin template.
+
+    If you want to create your own dashboard skin (or tweak something)
+    create a copy of the "/skins/template" directory and rename it
+    to something like: "/skins/your_skin_name" and edit config.json file inside.
+
+    See skin tutorial PDF file for more information.
+
+    CSS naming convention:
+
+    - Dashboard core script maps all telemetry data properties to respective class names,
+      so truck's speed will be .truck-speed and current gear is .truck-gear (see JSON).
+    - All boolean telemetry properties will have a special ".yes" class added
+      when the value is true (will be removed if value is false).
+    - When dashboard core script updates DOM it will always add
+      data-value attribute containing current value, so you
+      can use it to have custom css selectors based on the actual data
+      (for example, this skin uses .truck-gear[data-value="N"] to define
+      different style for neutral or reverse gear, see below).
+
+    For more information go to home page: https://github.com/Funbit/ets2-telemetry-server
+
+*/
+
+
+
+:root {
+  --positive-color: #64dd17;
+  --positive-color-bright: #00ff00;
+  --negative-color: #fb8c00;
+  --warning-color: #ff0000;
+  --data-color: #ffffff;
+  --label-color: #e6e6e6;
+  --divider-color: #9e9e9e;
+  --divider-color-2: #707070;
+}
+
+.bedIcon {
+  position: fixed;
+  margin-right: 280px;
+  margin-bottom: 75px;
+  /* Temp hide while backend not implemented */
+  display: none;
+}
+
+.servicesIcon {
+  position: fixed;
+  margin-right: 280px;
+  margin-top: 65px;
+  /* Temp hide while backend not implemented */
+  display: none;
+}
+
+.timeIcon {
+  position: fixed;
+  margin-left: 50px;
+  margin-top: 65px;
+  /* Temp hide while backend not implemented */
+  display: none;
+}
+
+/* 
+html {
+}
+*/
+
+body {
+  background-color: black;
+}
+
+.label {
+  font-size: 16pt;
+  color: var(--label-color);
+  position: absolute;
+  padding-top: 13%;
+}
+
+.bottomLabel {
+  font-size: 16pt;
+  color: var(--label-color);
+  position: absolute;
+  padding-top: 11.5%;
+}
+
+.speedLimitUnitlabel {
+  font-size: 16pt;
+  color: var(--label-color);
+  position: absolute;
+  justify-content: right;
+  padding-top: 13%;
+  margin-right: 0.5%;
+}
+
+.speedLimitUnitlabelMph {
+  font-size: 16pt;
+  color: var(--label-color);
+  position: absolute;
+  justify-content: right;
+  padding-top: 14%;
+  margin-right: 0.5%;
+}
+
+.smallLabel {
+  font-size: 12pt;
+  color: var(--label-color);
+  position: absolute;
+  padding-top: 13%;
+}
+
+.shape {
+  display: flex;
+}
+
+/* PC and Pixel 2*/
+.data {
+  font-size: 80pt;
+  position: absolute;
+  margin-top: -3%;
+}
+
+.smallData {
+  font-size: 70pt;
+  color: var(--label-color);
+  position: absolute;
+  margin-top: -4%;
+} 
+
+/* Huwawei P20
+.data {
+  font-size: 80pt;
+  position: absolute;
+  margin-top: -1.5%;
+}
+
+.smallData {
+  font-size: 70pt;
+  color: var(--label-color);
+  position: absolute;
+  margin-top: -2%;
+} */
+
+.overspeedLevel-2 {
+  padding-left: 33%;
+}
+
+.smallerData {
+  font-size: 55pt;
+  color: var(--label-color);
+  position: absolute;
+  margin-top: -3%;
+}
+
+.dashboard {
+  color: var(--data-color);
+  font-size: 60px;
+  font-family: Tahoma;
+}
+
+/* If the .yes class is present, it means game-connected is true */
+/* and thus the contents of this css class will be applied */
+.dashboard.game-connected.yes {
+  background-color: black;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+.container {
+  min-height: 100%;
+  min-width: 100%;
+  /* visibility: hidden; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "row1 row1 row1 row1 row1"
+    "row2 row2 row2 row2 row2"
+    "row3 row3 row3 row3 row3";
+}
+
+
+/* For presentation only, no need to copy the code below */
+
+/*.container * {
+  border: 1px solid var(--divider-color-2);
+}*/
+
+.container *:after {
+  /* content:attr(class); */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.container > div {
+  outline: 1px var(--divider-color-2) solid;
+}
+
+.row1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-rows: max-content;
+  grid-template-areas:
+    "box-actualGearName box-actualGearName box-displayedGearName box-displayedGearName box-shifterGroup box-shifterGroup box-retarderStep box-engineBrakeEnabled";
+  grid-area: row1;
+  align-content: space-evenly;
+  align-items: stretch;
+  justify-content: space-evenly;
+}
+
+    .row1 > div {
+      outline: 1px var(--divider-color-2) solid;
+    }
+
+    .box-actualGearName {
+      grid-area: box-actualGearName;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .box-displayedGearName {
+      grid-area: box-displayedGearName; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .box-shifterGroup {
+      grid-area: box-shifterGroup; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .box-retarderStep {
+      color: var(--negative-color);
+      grid-area: box-retarderStep; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .box-engineBrakeEnabled {
+      grid-area: box-engineBrakeEnabled; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "box-speedRoundedMph box-speedLimitRoundedMph box-cruiseControlSpeedRoundedMph box-cruiseControlEnabled box-overspeedLevel";
+  grid-area: row2;
+}
+
+    .row2 > div {
+      outline: 1px var(--divider-color-2) solid;
+    }
+    .box-speedRoundedMph {
+      grid-area: box-speedRoundedMph; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .box-speedLimitRoundedMph {
+      grid-area: box-speedLimitRoundedMph;
+      display: flex;
+      align-items: baseline;
+      justify-content: right;
+    }
+
+    .box-cruiseControlEnabled {
+      grid-area: box-cruiseControlEnabled; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .box-overspeedLevel {
+      grid-area: box-overspeedLevel; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .box-cruiseControlSpeedRoundedMph {
+      color: var(--positive-color-bright);
+      grid-area: box-cruiseControlSpeedRoundedMph; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+.row3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "box-speedRounded box-speedLimitRounded box-cruiseControlSpeedRounded box-messageArea box-messageArea";
+  grid-area: row3;
+}
+
+    .row3 > div {
+      outline: 1px var(--divider-color-2) solid;
+    }
+
+    .box-speedRounded {
+      grid-area: box-speedRounded; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .box-speedLimitRounded {
+      grid-area: box-speedLimitRounded;
+      display: flex;
+      align-items: baseline;
+      justify-content: right;
+    }
+
+    .box-cruiseControlSpeedRounded {
+      color: var(--positive-color-bright);
+      grid-area: box-cruiseControlSpeedRounded; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .box-messageArea {
+      grid-area: box-messageArea; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
+
+
+/* hide speed when not connected to the simulator */
+
+.game-connected.yes .container {
+  visibility: visible;
+  color: white;
+  /* position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    line-height: 1152px; */
+}
+
+/* .truck-speedRoundedMph {
+  color: green;
+} */
+
+.game-connected.yes .statusMessage {
+  visibility: hidden;
+}
+
+.statusMessage {
+  font-size: 70px;
+  text-align: center;
+  line-height: 1152px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  color: orange;
+}

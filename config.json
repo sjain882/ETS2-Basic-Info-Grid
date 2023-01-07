@@ -1,0 +1,44 @@
+{
+    "comments": [
+        "==============================",
+        "     SKIN CONFIGURATION       ",
+        "==============================",
+
+        "Required properties:",
+
+        "           name: name of the skin (directory name: /skins/name)",
+        "          title: human readable skin title",
+        "         author: author name",
+        "          width: width of the skin in pixels (same as defined in the CSS)",
+        "         height: height of the skin in pixels (same as defined in the CSS)",
+
+
+        "To get perfect fit, you need to adjust width and height for your device.",
+        "It will never equal the actual device resolution, but will be something much",
+        "lower instead, e.g., see pixel 2 xl below, actually that device is 2880x1440!",
+
+        "It is NOT an issue with the CSS/HTML/JS in either the core or this skin.",
+        "For proper behaviour it would require a lot of work in the core, removing its",
+        "auto resize functions, which would make it incompatible with other skins.",
+
+        "To get proper fullscreen, use dolphin browser on android, add to home screen",
+        "then swipe from right and click full screen mode, then autorotate, then landscape.",
+
+        "--- Good resolution settings: ---",
+        "Desktop chrome almost perfect on 100% zoom: 2240x1080",
+        "Pixel 2 XL Settings Chrome non fullscreen: 1150x440",
+        "Pixel 2 XL Settings dolphin fullscreen: 880x440",
+        "Huawei P20: Also 880x440"
+
+
+    ],
+
+    "config": {
+        "name": "basic-info-grid",
+        "title": "Basic Info Grid",
+        "author": "sjain882",    
+        "width": 880,
+        "height": 440
+    }    
+
+}
