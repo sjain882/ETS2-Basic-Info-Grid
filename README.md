@@ -30,6 +30,8 @@ Quick notes:
 
 - Shifter gear range means the splitters (false: Low 1L / true: High 1H)
 
+- The bottom right gap is meant to show some icons if they are a concern (fuel range, job time remaining, next rest stop, remaining stops etc...) with logic from jobmonitor2P but it's currently unfinished.
+
 # True full-screen on Android 4.1+
 
 For some reason this was kind of awkward, using an ADB or [Quick Settings](https://play.google.com/store/apps/details?id=it.simonesestito.ntiles&hl=en_GB&gl=US) immersive mode enabler didn't work on some A11 devices but worked on others.
