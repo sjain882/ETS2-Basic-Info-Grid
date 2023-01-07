@@ -22,6 +22,14 @@ I wanted to make this fully modular, but due to my limited HTML, CSS, JS experie
 
 Uses CSS Grid, but the positioning of items inside the grid is controlled by padding values. It is mainly tuned for a specific device ([Huawei P20](https://www.gsmarena.com/huawei_p20-9107.php)).
 
+Quick notes:
+
+- Over-speed has space for 3 red bars - each red bar indicates 1 mph above speed limit
+
+- Shifter gear group means the range (false: Lower 1-6 / true: Upper 7-12)
+
+- Shifter gear range means the splitters (false: Low 1L / true: High 1H)
+
 # True full-screen on Android 4.1+
 
 For some reason this was kind of awkward, using an ADB or [Quick Settings](https://play.google.com/store/apps/details?id=it.simonesestito.ntiles&hl=en_GB&gl=US) immersive mode enabler didn't work on some A11 devices but worked on others.
