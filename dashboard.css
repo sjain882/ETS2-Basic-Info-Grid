@@ -112,7 +112,7 @@ body {
   display: flex;
 }
 
-/* PC and Pixel 2*/
+/* PC and Pixel 2
 .data {
   font-size: 80pt;
   position: absolute;
@@ -124,21 +124,38 @@ body {
   color: var(--label-color);
   position: absolute;
   margin-top: -4%;
-} 
+} */
 
-/* Huwawei P20
+ /* Huwawei P20 */
 .data {
   font-size: 80pt;
   position: absolute;
   margin-top: -1.5%;
 }
 
+ /* Huwawei P20 with top slightly cut off */
+.topData {
+  font-size: 70pt;
+  position: absolute;
+  margin-top: 1%;
+}
+
+/*
 .smallData {
   font-size: 70pt;
   color: var(--label-color);
   position: absolute;
   margin-top: -2%;
-} */
+}
+*/
+
+ /* Huwawei P20 with top slightly cut off */
+.shifterData {
+  font-size: 70pt;
+  color: var(--label-color);
+  position: absolute;
+  margin-top: 1%;
+}
 
 .overspeedLevel-2 {
   padding-left: 33%;
@@ -256,6 +273,7 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
+	   /* Huwawei P20 with top slightly cut off */
     }
 
 .row2 {
